@@ -9,12 +9,11 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Http\Firewall\ListenerInterface;
 
 /**
  * @author Knojector <dev@knojector.xyz>
  */
-class SteamListener implements ListenerInterface
+class SteamListener
 {
     /**
      * @var AuthenticationManagerInterface
@@ -51,8 +50,7 @@ class SteamListener implements ListenerInterface
         string $loginRedirect,
         TokenStorageInterface $tokenStorage,
         RequestValidatorInterface $requestValidator
-    )
-    {
+    ) {
         $this->authenticationManager = $authenticationManager;
         $this->router = $router;
         $this->loginRedirect = $loginRedirect;
@@ -63,7 +61,7 @@ class SteamListener implements ListenerInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(GetResponseEvent $event)
+    public function __invoke(GetResponseEvent $event)
     {
         $request = $event->getRequest();
 

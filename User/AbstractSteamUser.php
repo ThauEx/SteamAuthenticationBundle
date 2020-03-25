@@ -169,7 +169,7 @@ abstract class AbstractSteamUser implements SteamUserInterface, UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getLastLogOff(): \DateTime
+    public function getLastLogOff(): ?\DateTime
     {
         return $this->lastLogOff;
     }
@@ -177,7 +177,7 @@ abstract class AbstractSteamUser implements SteamUserInterface, UserInterface
     /**
      * {@inheritdoc}
      */
-    public function setLastLogOff(int $lastLogOff)
+    public function setLastLogOff(?int $lastLogOff)
     {
         $lastLogOffDate = new \DateTime();
         $lastLogOffDate->setTimestamp($lastLogOff);
@@ -333,17 +333,13 @@ abstract class AbstractSteamUser implements SteamUserInterface, UserInterface
     {
         return;
     }
-    
+
     /**
      * @return array
      */
-    public function getRoles(): array {
-        $roles = [];
-        foreach ($this->roles as $role) {
-            $roles[] = new Role($role);
-        }
-
-        return $roles;
+    public function getRoles(): array
+    {
+        return $this->roles;
     }
 
     /**
@@ -354,7 +350,7 @@ abstract class AbstractSteamUser implements SteamUserInterface, UserInterface
         $this->setCommunityVisibilityState($userData['communityvisibilitystate']);
         $this->setProfileState($userData['profilestate']);
         $this->setProfileName($userData['personaname']);
-        $this->setLastLogOff($userData['lastlogoff']);
+        $this->setLastLogOff($userData['lastlogoff'] ?? null);
         $this->setCommentPermission(
             isset($userData['commentpermission']) ? $userData['commentpermission'] : 0
         );

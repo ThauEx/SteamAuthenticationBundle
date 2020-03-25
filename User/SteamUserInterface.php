@@ -50,14 +50,14 @@ interface SteamUserInterface
     public function setProfileName(string  $name);
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
-    public function getLastLogOff(): \DateTime;
+    public function getLastLogOff(): ?\DateTime;
 
     /**
-     * @param int $lastLogOff
+     * @param int|null $lastLogOff
      */
-    public function setLastLogOff(int $lastLogOff);
+    public function setLastLogOff(?int $lastLogOff);
 
     /**
      * @return int
